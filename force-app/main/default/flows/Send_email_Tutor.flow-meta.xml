@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionCalls>
+        <name>Send_email_to_tutor</name>
+        <label>Send email to tutor</label>
+        <locationX>176</locationX>
+        <locationY>335</locationY>
+        <actionName>emailSimple</actionName>
+        <actionType>emailSimple</actionType>
+        <flowTransactionModel>CurrentTransaction</flowTransactionModel>
+        <inputParameters>
+            <name>emailBody</name>
+            <value>
+                <elementReference>Emailbody</elementReference>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>emailAddresses</name>
+            <value>
+                <elementReference>$Record.Tutor__r.Email__c</elementReference>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>sendRichBody</name>
+            <value>
+                <booleanValue>true</booleanValue>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>emailSubject</name>
+            <value>
+                <stringValue>Course update</stringValue>
+            </value>
+        </inputParameters>
+    </actionCalls>
+    <apiVersion>56.0</apiVersion>
+    <environments>Default</environments>
+    <interviewLabel>Send email Tutor {!$Flow.CurrentDateTime}</interviewLabel>
+    <label>Send email Tutor</label>
+    <processMetadataValues>
+        <name>BuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>CanvasMode</name>
+        <value>
+            <stringValue>AUTO_LAYOUT_CANVAS</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>OriginBuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processType>AutoLaunchedFlow</processType>
+    <start>
+        <locationX>50</locationX>
+        <locationY>0</locationY>
+        <connector>
+            <targetReference>Send_email_to_tutor</targetReference>
+        </connector>
+        <object>Course__c</object>
+        <recordTriggerType>CreateAndUpdate</recordTriggerType>
+        <triggerType>RecordAfterSave</triggerType>
+    </start>
+    <status>Active</status>
+    <textTemplates>
+        <name>Emailbody</name>
+        <isViewedAsPlainText>false</isViewedAsPlainText>
+        <text>&lt;p&gt;● Name - {!$Record.Name}&lt;/p&gt;&lt;p&gt;● Description -{!$Record.Description__c}&lt;/p&gt;&lt;p&gt;● Tutor - {!$Record.Tutor__r.Name}&lt;/p&gt;&lt;p&gt;● Start Date - {!$Record.Start_Date__c}&lt;/p&gt;&lt;p&gt;● End Date -  {!$Record.End_Date__c}&lt;/p&gt;&lt;p&gt;● Credit - {!$Record.Credit__c}&lt;/p&gt;&lt;p&gt;● Attendees Quota - &lt;span style=&quot;background-color: rgb(255, 255, 255); color: rgb(68, 68, 68);&quot;&gt;{!$Record.Attendees_Quota__c}&lt;/span&gt;&lt;/p&gt;&lt;p&gt;● Completed - {!$Record.Completed__c}&lt;/p&gt;&lt;p&gt;● Attendees Count - {!$Record.Attendees_Count__c}&lt;/p&gt;&lt;p&gt;● Available Seats - {!$Record.Available_Seats__c}&lt;/p&gt;</text>
+    </textTemplates>
+</Flow>
